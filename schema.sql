@@ -73,12 +73,14 @@ CSV HEADER;
 ALTER TABLE reviews
 ALTER COLUMN date TYPE timestamptz USING to_timestamp(CAST(date as bigint)/1000);
 
+ALTER TABLE reviews ALTER COLUMN date SET DEFAULT now();
+
 CREATE INDEX idx_reviews_product_id ON reviews(product_id);
 CREATE INDEX idx_photos_review_id ON reviews_photos(review_id);
 CREATE INDEX idx_characteristics_product_id ON characteristics(product_id);
 CREATE INDEX idx_chr_rev_char_id ON characteristics_reviews(characteristic_id);
 CREATE INDEX idx_chr_rev_review_id ON characteristics_reviews(review_id);
 
-SELECT setval('reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews), 1), false)
-SELECT setval('reviews_photos_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews_photos), 1), false)
-SELECT setval('characteristics_reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM characteristics_reviews), 1), false)
+SELECT setval('reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews), 1), false);
+SELECT setval('reviews_photos_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews_photos), 1), false);
+SELECT setval('characteristics_reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM characteristics_reviews), 1), false);
