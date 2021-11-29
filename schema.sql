@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS reviews(
 );
 
 COPY reviews(id, product_id, rating, date, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness)
-FROM '/Users/philhuynh/hackreactorProjects/hr-rfe6-system-design-capstone/data/reviews.csv'
+FROM '../data/reviews.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS reviews_photos(
 );
 
 COPY reviews_photos(id, review_id, url)
-FROM '/Users/philhuynh/hackreactorProjects/hr-rfe6-system-design-capstone/data/reviews_photos.csv'
+FROM '../data/reviews_photos.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS characteristics(
 );
 
 COPY characteristics(id, product_id, name)
-FROM '/Users/philhuynh/hackreactorProjects/hr-rfe6-system-design-capstone/data/characteristics.csv'
+FROM '../data/characteristics.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS characteristics_reviews(
 );
 
 COPY characteristics_reviews(id, characteristic_id, review_id, value)
-FROM '/Users/philhuynh/hackreactorProjects/hr-rfe6-system-design-capstone/data/characteristic_reviews.csv'
+FROM '../data/characteristic_reviews.csv'
 DELIMITER ','
 CSV HEADER;
 
