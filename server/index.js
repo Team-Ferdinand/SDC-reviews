@@ -17,6 +17,9 @@ app.get('/', (req,res) => {
   res.send('server is connected');
 });
 
+app.get('/loaderio-6d3dc3a5b535d2a9d9a1104c463c9de0', (req, res) => {
+  res.send('/loaderio-6d3dc3a5b535d2a9d9a1104c463c9de0');
+});
 
 app.get('/reviews', (req, res) => {
   const productId = req.query.product_id || undefined;
