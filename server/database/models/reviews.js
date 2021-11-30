@@ -55,15 +55,15 @@ module.exports = {
           WHERE reviews.product_id = ${productId} AND reviews.recommend = true)
       )recommended,
       json_object_agg(
-        chars.name,
+        x.name,
           json_build_object(
-            'id', chars.id,
+            'id', x.id,
             'value', (SELECT AVG (CAST(char_revs.value as Float))
                 FROM char_revs
-                WHERE char_revs.char_id = chars.id
+                WHERE char_revs.char_id = x.id
             )
         )
-      )characteristics FROM chars WHERE chars.product_id = ${productId}`
+      )characteristics FROM chars AS x WHERE x.product_id = ${productId}`
     );
   },
 
