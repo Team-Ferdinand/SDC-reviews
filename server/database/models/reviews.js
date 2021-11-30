@@ -63,7 +63,7 @@ module.exports = {
                 WHERE char_revs.char_id = x.id
             )
         )
-      )characteristics FROM chars AS x WHERE x.product_id = ${productId}`
+      )random FROM chars AS x WHERE x.product_id = ${productId}`
     );
   },
 
