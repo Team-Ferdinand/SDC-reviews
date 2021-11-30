@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const db = require('./database');
 const models = require('./database/models');
-const moment = require('moment');
 const morgan = require('morgan');
 
 const port = 3000;
