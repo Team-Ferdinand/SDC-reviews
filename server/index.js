@@ -44,9 +44,9 @@ app.get('/reviews/meta', (req, res) => {
         product_id: productId,
         ratings: rows[0].ratings,
         recommended: rows[0].recommended,
-        //characteristics: rows[0].characteristics,
+        characteristics: rows[0].characteristics,
       };
-      //res.json(response);
+      res.json(response);
     })
     .catch((err) => {
       console.log("🚀 ~ file: index.js ~ line 49 ~ app.get ~ err", err);
