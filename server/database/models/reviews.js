@@ -55,15 +55,15 @@ module.exports = {
           WHERE reviews.product_id = ${productId} AND reviews.recommend = true)
       )recommended,
       json_object_agg(
-        characteristics.name,
+        chars.name,
           json_build_object(
-            'id', characteristics.id,
-            'value', (SELECT AVG (CAST(characteristics_reviews.value as Float))
-                FROM characteristics_reviews
-                WHERE characteristics_reviews.characteristic_id = characteristics.id
+            'id', chars.id,
+            'value', (SELECT AVG (CAST(char_revs.value as Float))
+                FROM char_revs
+                WHERE char_revs.char_id = chars.id
             )
         )
-      )characteristics FROM characteristics WHERE characteristics.product_id = ${productId}`
+      )characteristics FROM chars WHERE chars.product_id = ${productId}`
     );
   },
 
@@ -85,7 +85,7 @@ module.exports = {
 
   updateChaRev: (char, val, id) => {
     return db.pool.query(
-      `INSERT INTO characteristics_reviews (characteristic_id, review_id, value)
+      `INSERT INTO char_revs (char_id, review_id, value)
       VALUES(${char}, ${id}, ${val})
       `
     );
@@ -107,7 +107,4 @@ module.exports = {
     );
   }
 };
-
-
-
 

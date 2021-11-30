@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const db = require('./database');
 const models = require('./database/models');
-const moment = require('moment');
 const morgan = require('morgan');
 
 const port = 3000;
@@ -40,13 +39,14 @@ app.get('/reviews/meta', (req, res) => {
   const productId = req.query.product_id || undefined;
   models.reviews.getMetaData(productId)
     .then(({rows}) => {
+      console.log("🚀 ~ file: index.js ~ line 42 ~ .then ~ rows", rows)
       let response = {
         product_id: productId,
         ratings: rows[0].ratings,
         recommended: rows[0].recommended,
-        characteristics: rows[0].characteristics,
+        //characteristics: rows[0].characteristics,
       };
-      res.json(response);
+      //res.json(response);
     })
     .catch((err) => {
       console.log("🚀 ~ file: index.js ~ line 49 ~ app.get ~ err", err);

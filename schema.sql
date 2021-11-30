@@ -37,35 +37,35 @@ FROM '/home/ubuntu/data/reviews_photos.csv'
 DELIMITER ','
 CSV HEADER;
 
-DROP TABLE IF EXISTS characteristics CASCADE;
+DROP TABLE IF EXISTS chars CASCADE;
 
-CREATE TABLE IF NOT EXISTS characteristics(
+CREATE TABLE IF NOT EXISTS chars(
   id SERIAL NOT NULL,
   product_id INTEGER NOT NULL,
   name TEXT,
   PRIMARY KEY (id)
 );
 
-COPY characteristics(id, product_id, name)
+COPY chars(id, product_id, name)
 FROM '/home/ubuntu/data/characteristics.csv'
 DELIMITER ','
 CSV HEADER;
 
-DROP TABLE IF EXISTS characteristics_reviews;
+DROP TABLE IF EXISTS char_revs;
 
-CREATE TABLE IF NOT EXISTS characteristics_reviews(
+CREATE TABLE IF NOT EXISTS char_revs(
   id SERIAL NOT NULL,
-  characteristic_id INTEGER NOT NULL,
+  char_id INTEGER NOT NULL,
   review_id INTEGER NOT NULL,
   value INTEGER,
   PRIMARY KEY (id),
   FOREIGN KEY (review_id)
     REFERENCES reviews(id),
-  FOREIGN KEY (characteristic_id)
-    REFERENCES characteristics(id)
+  FOREIGN KEY (char_id)
+    REFERENCES chars(id)
 );
 
-COPY characteristics_reviews(id, characteristic_id, review_id, value)
+COPY char_revs(id, char_id, review_id, value)
 FROM '/home/ubuntu/data/characteristic_reviews.csv'
 DELIMITER ','
 CSV HEADER;
@@ -77,10 +77,10 @@ ALTER TABLE reviews ALTER COLUMN date SET DEFAULT now();
 
 CREATE INDEX idx_reviews_product_id ON reviews(product_id);
 CREATE INDEX idx_photos_review_id ON reviews_photos(review_id);
-CREATE INDEX idx_characteristics_product_id ON characteristics(product_id);
-CREATE INDEX idx_chr_rev_char_id ON characteristics_reviews(characteristic_id);
-CREATE INDEX idx_chr_rev_review_id ON characteristics_reviews(review_id);
+CREATE INDEX idx_char_product_id ON chars(product_id);
+CREATE INDEX idx_char_rev_char_id ON char_revs(char_id);
+CREATE INDEX idx_char_rev_review_id ON char_revs(review_id);
 
 SELECT setval('reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews), 1), false);
 SELECT setval('reviews_photos_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews_photos), 1), false);
-SELECT setval('characteristics_reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM characteristics_reviews), 1), false);
+SELECT setval('char_revs_id_seq', COALESCE((SELECT MAX(id)+1 FROM char_revs), 1), false);
