@@ -13,9 +13,9 @@ app.listen(port, () => {
   console.log(`Reviews API server listening at port: ${port}`);
 });
 app.get('/', (req,res) => {
-  console.log('connected')
-  res.send('server is connected')
-})
+  console.log('connected');
+  res.send('server is connected');
+});
 
 
 app.get('/reviews', (req, res) => {
