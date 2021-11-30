@@ -44,7 +44,7 @@ app.get('/reviews/meta', (req, res) => {
         product_id: productId,
         ratings: rows[0].ratings,
         recommended: rows[0].recommended,
-        characteristics: rows[0].characteristics,
+        characteristics: rows[0].random,
       };
       res.json(response);
     })
