@@ -40,7 +40,6 @@ app.get('/reviews/meta', (req, res) => {
   const productId = req.query.product_id || undefined;
   models.reviews.getMetaData(productId)
     .then(({rows}) => {
-      console.log("🚀 ~ file: index.js ~ line 42 ~ .then ~ rows", rows)
       let response = {
         product_id: productId,
         ratings: rows[0].ratings,
