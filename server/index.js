@@ -29,7 +29,7 @@ app.get('/reviews', (req, res) => {
     .then(({rows}) => {
       response.results = rows;
       delete response.rows;
-      res.json(response);
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log("🚀 ~ file: index.js ~ line 31 ~ app.get ~ err", err);
@@ -46,7 +46,7 @@ app.get('/reviews/meta', (req, res) => {
         recommended: rows[0].recommended,
         characteristics: rows[0].random,
       };
-      res.json(response);
+      res.status(200).json(response);
     })
     .catch((err) => {
       console.log("🚀 ~ file: index.js ~ line 49 ~ app.get ~ err", err);
