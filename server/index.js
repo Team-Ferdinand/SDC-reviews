@@ -2,12 +2,10 @@ const express = require('express');
 const app = express();
 const db = require('./database');
 const models = require('./database/models');
-const morgan = require('morgan');
 
 const port = 3000;
 
 app.use(express.json());
-app.use(morgan("dev"));
 
 app.listen(port, () => {
   console.log(`Reviews API server listening at port: ${port}`);
